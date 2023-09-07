@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="author" content="Ioan Tiba"/>
+        <meta name="contact" content="contact@ownbit.org"/>
+        <meta name="copyright" content="OwnBIT Development"/>
+        <meta name="reply-to" content="contact@ownbit.org"/>
+		<link rel="icon" type="image/x-icon" href="#{resource['custom-layout:images/favicons/favicon.ico']}" />
+		<link rel="apple-touch-icon" sizes="180x180" href="#{resource['custom-layout:images/favicons/apple-touch-icon.png']}" />
+		<link rel="icon" type="image/png" sizes="32x32" href="#{resource['custom-layout:images/favicons/favicon-32x32.png']}" />
+		<link rel="icon" type="image/png" sizes="16x16" href="#{resource['custom-layout:images/favicons/favicon-16x16.png']}" />
+		<link rel="manifest" href="#{resource['custom-layout:images/favicons/site.webmanifest']}" />
+    </f:facet>
+    <title><ui:insert name="title">#{msg['generic.application.name']}</ui:insert></title>
+
+    <h:outputScript name="js/layout.js" library="custom-layout"/>
+    <h:outputStylesheet name="css/layout.css" library="custom-layout"/>
+    <ui:insert name="head"/>
+</h:head>
+
+<h:body>
+    <div class="layout-wrapper">
+        <div class="layout-main">
+            <div class="layout-content">
+        		<h:form id="content-form" prependId="false" autocomplete="off" style="width: 100%;">
+			 		<input autocomplete="off" name="hidden" type="text" style="display:none;"/>
+		            <p:growl id="msgs" showDetail="true" showSummary="false" sticky="false" life="6000"/>
+			    	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" style="white-space: pre;">
+				        <p:commandButton value="#{msg['generic.no']}" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
+				        <p:commandButton value="#{msg['generic.yes']}" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+				    </p:confirmDialog>
+		            <ui:insert name="content"/>
+	   			</h:form>
+            </div>
+        </div>
+    </div>
+
+    <p:ajaxStatus style="position:fixed;right:7px;bottom:7px">
+        <f:facet name="start">
+            <i class="fa fa-spin fa-spinner layout-ajax-loader-icon" style="font-size:48px;color:red" aria-hidden="true"/>
+        </f:facet>
+    </p:ajaxStatus>
+    
+	<pe:blockUI widgetVar="blockUIWidget" cssOverlay="{opacity:0.7}">  
+		<div class="cm-spinner"></div>
+	</pe:blockUI> 
+</h:body>
+
+</html>

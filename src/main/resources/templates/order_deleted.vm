@@ -1,0 +1,138 @@
+<html>
+  <head></head>
+  <body>
+    <table align="center" style="width:100%;min-width:100%;max-width:500px" border="0" cellspacing="0" cellpadding="0">
+      <tbody style="border:none">
+        <tr>
+          <td align="center" valign="top">
+            <table style="max-width:100%" border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td style="width:100%;font-size:0pt;line-height:0pt;margin:0;font-weight:normal;min-width:100%">
+                    <table width="100%" style="min-width:100%" border="0" cellspacing="0" cellpadding="0">
+                      <tbody>
+                        <tr>
+                          <td style="padding-bottom:10px">
+                            <table width="800px" style="min-width:100%" border="0" cellspacing="0" cellpadding="0">
+                              <tbody>
+                                <tr>
+                                  <td style="padding:20px;border-radius:0px" bgcolor="#ffffff">
+                                    <table width="100%" style="min-width:100%" border="0" cellspacing="0" cellpadding="0">
+                                      <tbody>
+                                      
+                                        <tr>
+                                          <td style="color:#656464;font-family:'Calibri',Arial,sans-serif;font-size:15px;line-height:17px;text-align:left;"> 
+                                          	Salutare <b>${FULL_NAME}</b>, <br> <br>Comanda, cu numarul <b>${ORDER_NO}</b>, plasata pe platforma 
+                                          	<b>${APP_NAME}</b> a fost eliminata complet din sistem de catre ${WHO_DELETED}.
+                                          </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                          <td>
+                                            <table width="100%" style="font-size:0pt;line-height:0pt;text-align:center;width:100%;min-width:100%;margin-bottom:20px" border="0" cellspacing="0" cellpadding="0">
+                                              <tbody>
+                                                <tr>
+                                                  <td height="1" style="font-size:0pt;line-height:0pt;text-align:center;width:100%;min-width:100%" bgcolor="#e3e3e3">&nbsp;</td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                          <td align="center">
+                                            <table width="auto" border="0" cellspacing="10" cellpadding="10">
+                                              <tbody>
+                                                <tr>
+                                                  <td style="padding:10px;border-radius:0px;" bgcolor="#ffffff">
+                                                    <table width="100%" style="min-width:100%;" border="0" cellspacing="0" cellpadding="0">
+                                                      <tbody>
+                                                  		<tr>
+                                                          <td style="color:#773c3c;font-family:'Calibri',Arial,sans-serif;font-size:15px;line-height:17px;text-align:left;padding:10px 0 15px 0"> 
+                                                          Puteti vizualiza toate comenzile plasate accesand sectiunea de comenzi din platforma <b>${APP_NAME}</b>:
+                                                          <br></td>
+                                                        </tr>
+                                                        
+                                                        <tr>
+                                                        	<td style="text-align:center;"> 
+                                                          <a style="color:#0072bc;text-decoration:none" href="${APP_SERVER}/my-account/main.xhtml?content=orders" target="_blank" 
+                                                          data-saferedirecturl="${APP_SERVER}/my-account/main.xhtml?content=orders">
+                                                          <span style="color:#0072bc;text-decoration:none;font-size: 18px;">Comenzi</span></a></td>
+                                                        </tr>
+                                                      
+                                                      </tbody>
+                                                    </table>
+                                                  </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                          <td>
+                                            <table width="100%" style="font-size:0pt;line-height:0pt;text-align:center;width:100%;min-width:100%;margin-bottom:20px" bgcolor="#e3e3e3" border="0" cellspacing="0" cellpadding="0">
+                                              <tbody>
+                                                <tr>
+                                                  <td height="1" style="font-size:0pt;line-height:0pt;text-align:center;width:100%;min-width:100%" bgcolor="#e3e3e3">&nbsp;</td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                          <td align="center">
+                                            <table width="100%" style="min-width:100%" border="0" cellspacing="0" cellpadding="0">
+                                              <tbody>
+                                                <tr>
+                                                  <td style="padding:10px;border-radius:0px" bgcolor="#ffffff">
+                                                    <table width="100%" style="min-width:100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tbody>
+                                                        <tr>
+                                                          <td align="center">
+                                                            <table border="0" cellspacing="0" cellpadding="0">
+                                                              <tbody>
+                                                                <tr>
+                                                                  <td style="font-family:'Calibri',Arial,sans-serif;font-size:16px;line-height:20px;text-align:left;padding:5px 15px;
+                                                                  border:1px solid #0072bc;border-radius:7px;text-transform:uppercase;color:#0072bc"> 
+                                                                  <a style="color:#0072bc;text-decoration:none" href="tel:+40732166676" target="_blank">
+                                                                  <span style="color:#0072bc;text-decoration:none">+40 732 166 676 </span></a> </td>
+                                                                </tr>
+                                                              </tbody>
+                                                            </table>
+                                                          </td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td style="color:#656464;font-family:'Calibri',Arial,sans-serif;font-size:15px;line-height:17px;text-align: center;padding: 25px 0 0px 0;"> 
+                                                          Pe curand, <br>Echipa <b>${APP_NAME}</b></td>
+                                                        </tr>
+                                                      </tbody>
+                                                    </table>
+                                                  </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </td>
+                                        </tr>
+                                        
+                                      </tbody>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

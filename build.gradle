@@ -1,0 +1,50 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.1.3'
+	id 'io.spring.dependency-management' version '1.1.2'
+	id 'org.joinfaces' version '5.1.3'
+}
+
+group = 'org.ownbit'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven { url "https://repository.primefaces.org" } //PrimeFaces Maven Repository
+}
+
+dependencies {
+
+	/* Starter for building web, including RESTful, applications using Spring MVC. */
+	implementation ("org.springframework.boot:spring-boot-starter-web")
+	
+	/* Automatic Resource Management, automatic generation of getters, setters, equals, hashCode and toString, and more! */
+	compileOnly ("org.projectlombok:lombok")
+	annotationProcessor ("org.projectlombok:lombok")
+	
+	/* Starter for testing Spring Boot applications with libraries including JUnit Jupiter, Hamcrest and Mockito */
+	testImplementation ("org.springframework.boot:spring-boot-starter-test")
+	
+	/* PrimeFaces Spring Boot Starter*/
+	implementation group: 'org.joinfaces', name: 'primefaces-spring-boot-starter', classifier: 'jakarta'
+	
+	/* JavaBeans Validation (Bean Validation) is a validation model that can add constraints to the beans with annotations placed on fields, methods, or classes. */
+	//implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.0.2'
+	
+	/* Hibernate's Jakarta Bean Validation reference implementation */
+	implementation group: 'org.hibernate.validator', name: 'hibernate-validator', version: '8.0.1.Final'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

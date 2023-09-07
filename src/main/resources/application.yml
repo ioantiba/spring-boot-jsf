@@ -1,0 +1,38 @@
+server:
+  port: 9200
+  forward-headers-strategy: native
+  servlet:
+    context-path: /web
+    session:
+      timeout: 28800
+      tracking-modes:
+      - cookie
+      
+spring:
+  profiles:
+    active: 
+    - development
+  output:
+    ansi:
+      enabled: DETECT
+
+  jackson:
+    default-property-inclusion: NON_NULL
+    serialization:
+      indent-output: true
+
+joinfaces:
+  faces:
+    PROJECT_STAGE: Development
+  primefaces:
+    theme: vela
+
+logging:
+  level:
+    root: INFO
+  file:
+    name: /var/log/spring-boot-jsf/web-app.log
+  pattern:
+    level: INFO
+    console: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} - [%t] [%F %L] %c{1} - %msg%n"
+    file: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} - [PID: ${PID:- }] - [%t] [%F %L] %c{1} - %msg%n"
