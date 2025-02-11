@@ -16,13 +16,20 @@
         <meta name="contact" content="contact@ownbit.org"/>
         <meta name="copyright" content="OwnBIT Development"/>
         <meta name="reply-to" content="contact@ownbit.org"/>
-		<link rel="icon" type="image/x-icon" href="#{resource['custom-layout:images/favicons/favicon.ico']}" />
-		<link rel="apple-touch-icon" sizes="180x180" href="#{resource['custom-layout:images/favicons/apple-touch-icon.png']}" />
-		<link rel="icon" type="image/png" sizes="32x32" href="#{resource['custom-layout:images/favicons/favicon-32x32.png']}" />
-		<link rel="icon" type="image/png" sizes="16x16" href="#{resource['custom-layout:images/favicons/favicon-16x16.png']}" />
-		<link rel="manifest" href="#{resource['custom-layout:images/favicons/site.webmanifest']}" />
+        <link rel="icon" type="image/x-icon" href="#{resource['custom-layout:images/favicons/favicon.ico']}" />
+        <link rel="apple-touch-icon" sizes="180x180" href="#{resource['custom-layout:images/favicons/apple-touch-icon.png']}" />
+        <link rel="icon" type="image/png" sizes="32x32" href="#{resource['custom-layout:images/favicons/favicon-32x32.png']}" />
+        <link rel="icon" type="image/png" sizes="16x16" href="#{resource['custom-layout:images/favicons/favicon-16x16.png']}" />
+        <link rel="manifest" href="#{resource['custom-layout:images/favicons/site.webmanifest']}" />
     </f:facet>
-    <title><ui:insert name="title">#{msg['generic.application.name']}</ui:insert></title>
+    <title>
+        <ui:insert name="title">#{msg['generic.application.name']}</ui:insert>
+    </title>
+
+    <!-- Bootstrap CSS (folosind Bootstrap 5) -->
+    <h:outputStylesheet name="css/bootstrap.min.css" library="custom-layout"/>
+    <!-- Bootstrap Bundle JS cu Popper -->
+    <h:outputScript name="js/bootstrap.bundle.min.js" library="custom-layout"/>
 
     <h:outputScript name="js/layout.js" library="custom-layout"/>
     <h:outputStylesheet name="css/layout.css" library="custom-layout"/>
@@ -30,31 +37,67 @@
 </h:head>
 
 <h:body>
-    <div class="layout-wrapper">
-        <div class="layout-main">
-            <div class="layout-content">
-        		<h:form id="content-form" prependId="false" autocomplete="off" style="width: 100%;">
-			 		<input autocomplete="off" name="hidden" type="text" style="display:none;"/>
-		            <p:growl id="msgs" showDetail="true" showSummary="false" sticky="false" life="6000"/>
-			    	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" style="white-space: pre;">
-				        <p:commandButton value="#{msg['generic.no']}" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
-				        <p:commandButton value="#{msg['generic.yes']}" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
-				    </p:confirmDialog>
-		            <ui:insert name="content"/>
-	   			</h:form>
+    <!-- Header cu Navbar Bootstrap -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="#">SpringJSF</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Acasă</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Profil</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Conținutul Principal -->
+    <main class="container mt-4">
+        <div class="layout-wrapper">
+            <div class="layout-main">
+                <div class="layout-content">
+                    <h:form id="content-form" prependId="false" autocomplete="off" style="width: 100%;">
+                        <input autocomplete="off" name="hidden" type="text" style="display:none;"/>
+                        <p:growl id="msgs" showDetail="true" showSummary="false" sticky="false" life="6000"/>
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" style="white-space: pre;">
+                            <p:commandButton value="#{msg['generic.no']}" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
+                            <p:commandButton value="#{msg['generic.yes']}" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                        </p:confirmDialog>
+                        <ui:insert name="content"/>
+                    </h:form>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-3 mt-4 fixed-bottom">
+        <div class="container">
+            <span class="text-muted">© 2025 SpringJSF</span>
+        </div>
+    </footer>
 
     <p:ajaxStatus style="position:fixed;right:7px;bottom:7px">
         <f:facet name="start">
             <i class="fa fa-spin fa-spinner layout-ajax-loader-icon" style="font-size:48px;color:red" aria-hidden="true"/>
         </f:facet>
     </p:ajaxStatus>
-    
-	<pe:blockUI widgetVar="blockUIWidget" cssOverlay="{opacity:0.7}">  
-		<div class="cm-spinner"></div>
-	</pe:blockUI> 
+
+    <pe:blockUI widgetVar="blockUIWidget" cssOverlay="{opacity:0.7}">
+        <div class="cm-spinner"></div>
+    </pe:blockUI>
 </h:body>
 
 </html>
