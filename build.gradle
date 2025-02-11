@@ -1,20 +1,50 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.1.3'
-	id 'io.spring.dependency-management' version '1.1.2'
-	id 'org.joinfaces' version '5.1.3'
+	id 'org.springframework.boot' version '3.4.2'
+	id 'io.spring.dependency-management' version '1.1.7'
+	id 'org.joinfaces' version '5.1.12'
+}
+ext {
+	springBootVersion = '3.4.2' /* org.springframework.boot » spring-boot-starter-* */
+	primefacesVersion = '14.0.11' /* org.primefaces » primefaces */
+	commonsFileUploadVersion = '2.0.0-M2'
+	joinfacesVersion = '5.4.2' /* org.joinfaces » joinfaces */
 }
 
 group = 'org.ownbit'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
 }
 
 configurations {
+	// Make the 'compileOnly' configuration include all dependencies from 'annotationProcessor'
 	compileOnly {
 		extendsFrom annotationProcessor
+	}
+}
+
+// Lazily configure all configurations
+configurations.configureEach {
+	// Globally exclude commons-logging from every configuration
+	//exclude group: 'commons-logging'
+
+	resolutionStrategy {
+		// Force a specific version of commons-fileupload
+		//force "org.apache.commons:commons-fileupload2-jakarta-servlet6:${commonsFileUploadVersion}"
+
+		// For every dependency resolution, if the dependency is PrimeFaces, use our specified version
+		eachDependency { DependencyResolveDetails details ->
+			if (details.requested.group == 'org.primefaces' && details.requested.name == 'primefaces') {
+				details.useVersion(primefacesVersion)
+			}
+			if (details.requested.group == 'org.primefaces.extensions') {
+				details.useVersion(primefacesVersion)
+			}
+		}
 	}
 }
 
@@ -26,23 +56,29 @@ repositories {
 dependencies {
 
 	/* Starter for building web, including RESTful, applications using Spring MVC. */
-	implementation ("org.springframework.boot:spring-boot-starter-web")
-	
+	implementation ("org.springframework.boot:spring-boot-starter-web:${springBootVersion}") /* org.springframework.boot » spring-boot-starter-web */
+
+	/* Joinfaces, PrimeFaces Spring Boot Starter*/
+	implementation ("org.joinfaces:primefaces-spring-boot-starter:${joinfacesVersion}") /* org.joinfaces » omnifaces-spring-boot-starter */
+
+	/* Omnifaces Spring Boot Starter */
+	implementation ("org.joinfaces:omnifaces-spring-boot-starter:${joinfacesVersion}")
+
+	/* PrimeFaces */
+	//implementation ("org.primefaces:primefaces:${primefacesVersion}") /* org.primefaces » primefaces */
+
 	/* Automatic Resource Management, automatic generation of getters, setters, equals, hashCode and toString, and more! */
-	compileOnly ("org.projectlombok:lombok")
-	annotationProcessor ("org.projectlombok:lombok")
+	compileOnly ("org.projectlombok:lombok") /* org.projectlombok » lombok */
+	annotationProcessor ("org.projectlombok:lombok") /* org.projectlombok » lombok */
 	
 	/* Starter for testing Spring Boot applications with libraries including JUnit Jupiter, Hamcrest and Mockito */
-	testImplementation ("org.springframework.boot:spring-boot-starter-test")
-	
-	/* PrimeFaces Spring Boot Starter*/
-	implementation group: 'org.joinfaces', name: 'primefaces-spring-boot-starter', classifier: 'jakarta'
+	testImplementation ("org.springframework.boot:spring-boot-starter-test") /* org.springframework.boot » spring-boot-starter-test */
 	
 	/* JavaBeans Validation (Bean Validation) is a validation model that can add constraints to the beans with annotations placed on fields, methods, or classes. */
 	//implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.0.2'
 	
 	/* Hibernate's Jakarta Bean Validation reference implementation */
-	implementation group: 'org.hibernate.validator', name: 'hibernate-validator', version: '8.0.1.Final'
+	implementation ("org.hibernate.validator:hibernate-validator:8.0.2.Final") /* org.hibernate.validator » hibernate-validator */
 }
 
 tasks.named('test') {

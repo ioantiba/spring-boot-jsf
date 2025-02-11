@@ -1,18 +1,11 @@
 package org.ownbit.springboot.jsf.config;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import java.util.Collections;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
-import org.apache.catalina.Host;
-import org.apache.catalina.core.StandardContext;
-import org.apache.catalina.startup.Tomcat;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.MimeMappings;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
-import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -24,17 +17,12 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
-import jakarta.servlet.ServletContainerInitializer;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer, WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> {
   
-  public static final String COOKIE_NAME = "portal.ownbit.org";
-  public static final Locale ROMANIAN = new Locale("ro", "RO");
+  public static final String COOKIE_NAME = "portal";
+  public static final Locale ROMANIAN = Locale.of("ro", "RO");
 
   @Override
   public void addViewControllers(ViewControllerRegistry registry) {
@@ -67,38 +55,6 @@ public class WebConfig implements WebMvcConfigurer, WebServerFactoryCustomizer<C
     return factory;
   }
   
-  @Bean
-  public TomcatServletWebServerFactory servletWebServerFactory() {
-    return new TomcatServletWebServerFactory() {
-
-      @Override
-      protected void prepareContext(Host host, ServletContextInitializer[] initializers) {
-        super.prepareContext(host, initializers);
-        StandardContext child = new StandardContext();
-        child.addLifecycleListener(new Tomcat.FixContextListener());
-        child.setPath("");
-        ServletContainerInitializer initializer = getServletContextInitializer(getContextPath());
-        child.addServletContainerInitializer(initializer, Collections.emptySet());
-        child.setCrossContext(true);
-        host.addChild(child);
-      }
-    };
-  }
-
-  private ServletContainerInitializer getServletContextInitializer(String contextPath) {
-    return (c, context) -> {
-      HttpServlet servlet = new HttpServlet() {
-        private static final long serialVersionUID = 1L;
-
-        @Override
-        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-          resp.sendRedirect(contextPath);
-        }
-      };
-      context.addServlet("root", servlet).addMapping("/*");
-    };
-  }
-  
   @Override
   public void customize(ConfigurableServletWebServerFactory factory) {
     MimeMappings mappings = new MimeMappings(MimeMappings.DEFAULT);
@@ -114,6 +70,8 @@ public class WebConfig implements WebMvcConfigurer, WebServerFactoryCustomizer<C
     mappings.add("woff2", "application/x-font-woff2");
     mappings.add("xhtml", "application/xml");
     mappings.add("webmanifest", "application/manifest+json"); //images/favicons/site.webmanifest
+    mappings.add("png", "image/png");
+    mappings.add("gif", "image/gif");
     factory.setMimeMappings(mappings);
   }
 }

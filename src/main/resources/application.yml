@@ -2,7 +2,6 @@ server:
   port: 9200
   forward-headers-strategy: native
   servlet:
-    context-path: /web
     session:
       timeout: 28800
       tracking-modes:
@@ -26,6 +25,8 @@ joinfaces:
     PROJECT_STAGE: Development
   primefaces:
     theme: vela
+  omnifaces:
+    faces-views-scan-paths: /*.xhtml
 
 logging:
   level:
